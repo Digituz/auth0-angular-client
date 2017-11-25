@@ -1,21 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import * as auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './auth0-variables';
-import { UserProfile } from './profile.model';
+import {UserProfile} from './profile.model';
 
 @Injectable()
 export class AuthService {
   // Create Auth0 web auth instance
   // @TODO: Update AUTH_CONFIG and remove .example extension in src/app/auth/auth0-variables.ts.example
-  auth0 = new auth0.WebAuth({
-    clientID: AUTH_CONFIG.CLIENT_ID,
-    domain: AUTH_CONFIG.CLIENT_DOMAIN,
-    responseType: 'token id_token',
-    redirectUri: AUTH_CONFIG.REDIRECT,
-    audience: AUTH_CONFIG.AUDIENCE,
-    scope: AUTH_CONFIG.SCOPE
-  });
+  auth0: any;
   userProfile: UserProfile;
 
   // Create a stream of logged in status to communicate throughout app
@@ -28,6 +20,17 @@ export class AuthService {
       this.userProfile = JSON.parse(localStorage.getItem('profile'));
       this.setLoggedIn(true);
     }
+  }
+
+  configure() {
+    this.auth0 = new auth0.WebAuth({
+      clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',
+      domain: 'bk-samples.auth0.com',
+      responseType: 'token id_token',
+      redirectUri: 'http://localhost:4200/callback',
+      audience: 'http://spring-boot-aside.auth0samples.com/',
+      scope: 'read:contacts'
+    });
   }
 
   setLoggedIn(value: boolean) {
@@ -55,7 +58,10 @@ export class AuthService {
 
   private _getProfile(authResult) {
     // Use access token to retrieve user's profile and set session
+    console.log('----- 1: ', authResult.accessToken);
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+      console.log('----- 2\n', profile);
+      console.log('----- 3\n', err);
       this._setSession(authResult, profile);
     });
   }

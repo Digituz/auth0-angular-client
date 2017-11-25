@@ -5,6 +5,7 @@
 </div>
 
 <div *ngIf="auth.authenticated">
+  {{auth.userProfile}}
   <p>Hello, <a routerLink="/profile" href>{{auth.userProfile?.name}}</a>!</p>
   <button (click)="auth.logout()">Log Out</button>
 
