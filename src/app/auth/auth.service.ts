@@ -22,14 +22,14 @@ export class AuthService {
     }
   }
 
-  configure() {
+  configure(clientID, domain, audience, scope) {
     this.auth0 = new auth0.WebAuth({
-      clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',
-      domain: 'bk-samples.auth0.com',
+      clientID: clientID,
+      domain: domain,
       responseType: 'token id_token',
       redirectUri: 'http://localhost:4200/callback',
-      audience: 'http://spring-boot-aside.auth0samples.com/',
-      scope: 'read:contacts'
+      audience: audience,
+      scope: scope
     });
   }
 

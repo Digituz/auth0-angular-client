@@ -21,8 +21,7 @@ $ cd server
 $ npm install
 ```
 
-1. Open `server/config.js.example` and remove `.example` from the file name. Then replace `[CLIENT_DOMAIN]` with your Auth0 domain.
-2. Open `src/app/auth/auth0-variables.ts.example` and remove `.example` from the file name. Then replace `[CLIENT_ID]` and `[CLIENT_DOMAIN]` with your Auth0 client ID and domain.
+Open a browser and head to [http://localhost:4200/?clientId=lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A&domain=bk-samples.auth0.com&audience=http://spring-boot-aside.auth0samples.com/&scope=read:contacts](http://localhost:4200/?clientId=lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A&domain=bk-samples.auth0.com&audience=http://spring-boot-aside.auth0samples.com/&scope=read:contacts).
 
 ## Serving the project
 
