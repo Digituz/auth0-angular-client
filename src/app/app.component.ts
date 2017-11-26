@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './auth/auth.service';
-import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
+import {Router, RoutesRecognized} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +8,21 @@ import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  clientId = 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A';
-  domain = 'bk-samples.auth0.com';
-  audience = 'http://spring-boot-aside.auth0samples.com/';
-  scope = 'read:contacts';
-
-  constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.router.events.subscribe(val => {
       if (val instanceof RoutesRecognized) {
         const {clientId, domain, audience, scope} = val.state.root.queryParams;
+        const auth0Config = this.auth.auth0Config;
 
-        this.clientId = clientId || this.clientId;
-        this.domain = domain || this.domain;
-        this.audience = audience || this.audience;
-        this.scope = scope || this.scope;
+        auth0Config.clientID = clientId || auth0Config.clientID;
+        auth0Config.domain = domain || auth0Config.domain;
+        auth0Config.audience = audience || auth0Config.audience;
+        auth0Config.scope = scope || auth0Config.scope;
 
-        this.auth.configure(clientId, domain, audience, scope);
+        this.auth.configure();
         this.auth.handleAuth();
       }
     });

@@ -5,10 +5,16 @@ import {UserProfile} from './profile.model';
 
 @Injectable()
 export class AuthService {
-  // Create Auth0 web auth instance
-  // @TODO: Update AUTH_CONFIG and remove .example extension in src/app/auth/auth0-variables.ts.example
   auth0: any;
   userProfile: UserProfile;
+  auth0Config = {
+    clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',
+    domain: 'bk-samples.auth0.com',
+    audience: 'http://spring-boot-aside.auth0samples.com/',
+    scope: 'read:contacts',
+    responseType: 'token id_token',
+    redirectUri: 'http://localhost:4200/callback'
+  };
 
   // Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;
@@ -22,15 +28,8 @@ export class AuthService {
     }
   }
 
-  configure(clientID, domain, audience, scope) {
-    this.auth0 = new auth0.WebAuth({
-      clientID: clientID,
-      domain: domain,
-      responseType: 'token id_token',
-      redirectUri: 'http://localhost:4200/callback',
-      audience: audience,
-      scope: scope
-    });
+  configure() {
+    this.auth0 = new auth0.WebAuth(this.auth0Config);
   }
 
   setLoggedIn(value: boolean) {
