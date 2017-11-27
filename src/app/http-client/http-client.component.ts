@@ -6,9 +6,11 @@ import {DOCUMENT} from '@angular/common';
 import jwt_decode from 'jwt-decode';
 
 export interface Request {
-  url: string,
-  method: string
-  response: object
+  url: string;
+  method: string;
+  body?: string;
+  contentType?: string;
+  response?: object;
 }
 
 @Component({
@@ -20,7 +22,7 @@ export class HttpClientComponent {
   req: Request = {
     url: 'http://localhost:8080/contacts/',
     method: 'post',
-    response: null
+    contentType: 'application/json'
   };
   scope: string;
 
@@ -31,12 +33,16 @@ export class HttpClientComponent {
 
   changeMethod(newMethod: string) {
     this.req.method = newMethod;
+    this.req.response = null;
   }
 
   sendRequest() {
     const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + accessToken)
+      .set('Content-Type', this.req.contentType);
     const requestOptions = {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + accessToken),
+      headers: headers,
     };
     const {url} = this.req;
     const loadResponse = data => {
@@ -45,16 +51,16 @@ export class HttpClientComponent {
 
     switch (this.req.method) {
       case 'get':
-        this.http.get(url, requestOptions).subscribe(loadResponse);
+        this.http.get(url, requestOptions).subscribe(loadResponse, loadResponse);
         break;
       case 'post':
-        this.http.post(url, {}, requestOptions).subscribe(loadResponse);
+        this.http.post(url, JSON.parse(this.req.body), requestOptions).subscribe(loadResponse, loadResponse);
         break;
       case 'put':
-        this.http.put(url, {}, requestOptions).subscribe(loadResponse);
+        this.http.put(url, JSON.parse(this.req.body), requestOptions).subscribe(loadResponse, loadResponse);
         break;
       case 'delete':
-        this.http.delete(url, requestOptions).subscribe(loadResponse);
+        this.http.delete(url, requestOptions).subscribe(loadResponse, loadResponse);
         break;
     }
   }

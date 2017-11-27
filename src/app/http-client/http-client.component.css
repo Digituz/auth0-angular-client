@@ -6,13 +6,15 @@ div.http-server p {
   width: 100%;
 }
 
-div.http-server input {
+div.http-server input,
+div.req-res-box-container input {
   flex-grow: 2;
   font-size: 14px;
   padding-left: 15px;
   margin: 0 5px 0 5px;
   border-radius: 3px;
   border: 1px solid #ddd;
+  line-height: 30px;
 }
 
 div.http-server select {
@@ -45,4 +47,9 @@ div.req-res-box-container {
   font-size: 14px;
   resize: vertical;
   outline: none;
+  display: flex;
+}
+
+div.current-settings {
+  margin-top: 15px;
 }

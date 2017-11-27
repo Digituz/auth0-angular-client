@@ -4,7 +4,8 @@
   or must accept requests from anywhere (not advised).
 </p>
 
-<p>You can change the HTTP method and URL. You can also define a body.</p>
+<p>Before issuing the request, you can change the HTTP method and URL. You can also define a body when <code>POST</code>
+  or <code>PUT</code> is the selected method.</p>
 
 <div class="http-server">
   <select #method (change)="changeMethod(method.value)">
@@ -19,7 +20,12 @@
 
 <div class="req-res-box-container" *ngIf="this.req.method === 'post' || this.req.method === 'put'">
   <label for="req-body">Request Body:</label>
-  <textarea id="req-body" class="req-res-box request-body"></textarea>
+  <textarea id="req-body" [(ngModel)]="req.body" class="req-res-box request-body"></textarea>
+</div>
+
+<div class="req-res-box-container" *ngIf="this.req.method === 'post' || this.req.method === 'put'">
+  <label for="req-type">Request Body:</label>
+  <input id="req-type" type="text" [(ngModel)]="req.contentType">
 </div>
 
 <div class="req-res-box-container" *ngIf="this.req.response">
