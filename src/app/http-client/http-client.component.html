@@ -4,10 +4,19 @@
   or must accept requests from anywhere (not advised).
 </p>
 
+<p>You can change the HTTP method and URL. You can also define a body.</p>
+
 <div class="http-server">
-  <input type="text">
+  <select #method (change)="changeMethod(method.value)">
+    <option value="get" selected>Get</option>
+    <option value="post">Post</option>
+    <option value="put">Put</option>
+    <option value="delete">Delete</option>
+  </select>
+  <input [(ngModel)]="req.url" type="text">
+  <button class="btn btn-success" (click)="sendRequest()">Send</button>
 </div>
 
-<div class="http-response">
-  {{this.httpResponse}}
+<div class="http-response" *ngIf="this.req.response">
+  {{this.req.response | json}}
 </div>

@@ -46,6 +46,7 @@ div.content {
   border: 0;
   background: transparent none;
   color: rgba(0,0,0,.86);
+  outline: none;
 }
 
 .btn-success {

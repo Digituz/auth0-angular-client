@@ -1,0 +1,32 @@
+div.http-server {
+  display: flex;
+}
+
+div.http-server p {
+  width: 100%;
+}
+
+div.http-server input {
+  flex-grow: 2;
+  font-size: 14px;
+  padding-left: 15px;
+  margin: 0 5px 0 5px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+
+div.http-server select {
+  background-color: #44c7f4;
+  color: #fff;
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  border: 1px solid #2cc0f3;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 80px;
+  text-align-last: center;
+  font-size: 14px;
+}
