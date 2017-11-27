@@ -9,21 +9,22 @@ import {Router, RoutesRecognized} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {
+    this.auth.configure();
+    this.auth.handleAuth();
   }
 
   ngOnInit(): void {
     this.router.events.subscribe(val => {
       if (val instanceof RoutesRecognized) {
-        const {clientId, domain, audience, scope} = val.state.root.queryParams;
+        const {clientID, domain, audience, scope} = val.state.root.queryParams;
         const auth0Config = this.auth.auth0Config;
 
-        auth0Config.clientID = clientId || auth0Config.clientID;
+        auth0Config.clientID = clientID || auth0Config.clientID;
         auth0Config.domain = domain || auth0Config.domain;
         auth0Config.audience = audience || auth0Config.audience;
         auth0Config.scope = scope || auth0Config.scope;
 
         this.auth.configure();
-        this.auth.handleAuth();
       }
     });
   }
