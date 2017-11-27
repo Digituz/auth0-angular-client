@@ -11,6 +11,10 @@ body {
   justify-content: center;
 }
 
+a {
+  color: #15204d;
+}
+
 div.content {
   max-width: 970px;
 }

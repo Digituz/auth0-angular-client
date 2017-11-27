@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../auth/auth.service';
-import {WindowService} from '../window.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +10,7 @@ import {WindowService} from '../window.service';
 export class HomeComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
 
-  constructor(public auth: AuthService, public windowService: WindowService) {
-    console.log(windowService.window);
-  }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
     // Subscribe to login status subject

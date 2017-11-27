@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CallbackComponent } from './callback/callback.component';
 import { ProfileComponent } from './profile/profile.component';
-import {WindowService} from './window.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import {WindowService} from './window.service';
     AppRoutingModule
   ],
   providers: [
-    AuthService,
-    WindowService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

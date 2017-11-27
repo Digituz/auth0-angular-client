@@ -1,26 +1,41 @@
 <img class="auth0-logo" [src]="'assets/logo-blue.png'">
 
 <p>
-  Use <a href="https://auth0.com">Auth0</a> to sign in with the following properties:
+  Use <a href="https://auth0.com" target="_blank">Auth0</a> to sign in with the following properties:
 </p>
 
 <div class="auth0-config">
   <p>&#x7b;</p>
-  <p class="property">clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',</p>
-  <p class="property">domain: 'bk-samples.auth0.com',</p>
-  <p class="property">audience: 'http://spring-boot-aside.auth0samples.com/',</p>
-  <p class="property">scope: 'read:contacts'</p>
+  <p class="property">
+    clientID:
+    <input type="text" [(ngModel)]="auth.auth0Config.clientID" name="name" required>,
+  </p>
+  <p class="property">
+    domain:
+    <input type="text" [(ngModel)]="auth.auth0Config.domain" name="name" required>,
+  </p>
+  <p class="property">
+    audience:
+    <input type="text" [(ngModel)]="auth.auth0Config.audience" name="name" required>,
+  </p>
+  <p class="property">
+    <span>scope:</span>
+    <input type="text" [(ngModel)]="auth.auth0Config.scope" name="name" required>
+    <span style="color: transparent">,</span>
+  </p>
   <p>&#x7d;</p>
 </div>
 
 <p>
   To share a predefine set of properties, we need a link that contains the following query parameters:
   <code>clientID</code>, <code>domain</code>, <code>audience</code>, and <code>scope</code>:
-  <a href="{{ windowService.window.location.href + '?clientID=' + auth.auth0Config.clientID +
-  '&domain=' + auth.auth0Config.domain + '&audience=' + auth.auth0Config.audience +
-  '&scope=' + auth.auth0Config.scope}}">
-    Auth0 Sample App
-  </a>
+
+  <a [routerLink]="[ '/' ]" [queryParams]="{
+    clientID: auth.auth0Config.clientID,
+    domain: auth.auth0Config.domain,
+    audience: auth.auth0Config.audience,
+    scope: auth.auth0Config.scope
+  }">Auth0 Sample App</a>
 </p>
 
 <div class="sign-in-container" *ngIf="!auth.authenticated">
