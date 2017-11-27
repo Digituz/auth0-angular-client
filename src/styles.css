@@ -17,6 +17,8 @@ img.auth0-logo {
 
 a {
   color: #15204d;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 div.content {

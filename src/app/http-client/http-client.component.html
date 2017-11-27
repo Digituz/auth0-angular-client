@@ -1,6 +1,6 @@
 <p>
-  This is a simple HTTP client that let' you easily send requests that already ship with your <code>access_token</code>.
-  Note that the HTTP server in question must explicitly accept requests originated from <code>{{this.router.url}}</code>
+  This is a simple HTTP client that lets you easily send requests that already ships with your <code>access_token</code>.
+  Note that the targeted HTTP server must explicitly accept requests originated from <code>{{document.location.origin}}</code>
   or must accept requests from anywhere (not advised).
 </p>
 
@@ -8,8 +8,8 @@
 
 <div class="http-server">
   <select #method (change)="changeMethod(method.value)">
-    <option value="get" selected>Get</option>
-    <option value="post">Post</option>
+    <option value="get">Get</option>
+    <option value="post" selected>Post</option>
     <option value="put">Put</option>
     <option value="delete">Delete</option>
   </select>
@@ -17,6 +17,17 @@
   <button class="btn btn-success" (click)="sendRequest()">Send</button>
 </div>
 
-<div class="http-response" *ngIf="this.req.response">
-  {{this.req.response | json}}
+<div class="req-res-box-container" *ngIf="this.req.method === 'post' || this.req.method === 'put'">
+  <label for="req-body">Request Body:</label>
+  <textarea id="req-body" class="req-res-box request-body"></textarea>
+</div>
+
+<div class="req-res-box-container" *ngIf="this.req.response">
+  <label for="req-body">Request Response:</label>
+  <div class="req-res-box">{{this.req.response | json}}</div>
+</div>
+
+<div class="current-settings">
+  The <code>access_token</code> in the current section contains the following <code>scope</code>:
+  <code>{{scope}}</code>. To change it, <a (click)="signOut()">sign out</a>, and issue a new token.
 </div>
