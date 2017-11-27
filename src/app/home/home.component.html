@@ -1,12 +1,10 @@
-<img class="auth0-logo" [src]="'assets/logo-blue.png'">
-
 <p>
   The button at the bottom sends the user to <a href="https://auth0.com" target="_blank">Auth0</a> to sign in.
   The token generated during the sign-in process is specific to an environment. This environment can be manipulated by
   changing the following properties:
 </p>
 
-<div class="auth0-config">
+<div class="code auth0-config">
   <p>&#x7b;</p>
   <p class="property">
     clientID:
@@ -40,12 +38,6 @@
   }">Auth0 Sample App</a>
 </p>
 
-<div class="sign-in-container" *ngIf="!auth.authenticated">
+<div class="sign-in-container">
   <button class="btn btn-success" (click)="auth.login()">Sign In with Auth0</button>
-</div>
-
-<div *ngIf="auth.authenticated">
-  {{auth.userProfile}}
-  <p>Hello, <a routerLink="/profile" href>{{auth.userProfile?.name}}</a>!</p>
-  <button (click)="auth.logout()">Sign Out</button>
 </div>
