@@ -1,21 +1,34 @@
-<h1>Angular with Auth0</h1>
+<img class="auth0-logo" [src]="'assets/logo-blue.png'">
 
-<div *ngIf="!auth.authenticated">
-  <button (click)="auth.login()">Log In</button>
+<p>
+  Use <a href="https://auth0.com">Auth0</a> to sign in with the following properties:
+</p>
+
+<div class="auth0-config">
+  <p>&#x7b;</p>
+  <p class="property">clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',</p>
+  <p class="property">domain: 'bk-samples.auth0.com',</p>
+  <p class="property">audience: 'http://spring-boot-aside.auth0samples.com/',</p>
+  <p class="property">scope: 'read:contacts'</p>
+  <p>&#x7d;</p>
+</div>
+
+<p>
+  To share a predefine set of properties, we need a link that contains the following query parameters:
+  <code>clientID</code>, <code>domain</code>, <code>audience</code>, and <code>scope</code>:
+  <a href="{{ windowService.window.location.href + '?clientID=' + auth.auth0Config.clientID +
+  '&domain=' + auth.auth0Config.domain + '&audience=' + auth.auth0Config.audience +
+  '&scope=' + auth.auth0Config.scope}}">
+    Auth0 Sample App
+  </a>
+</p>
+
+<div class="sign-in-container" *ngIf="!auth.authenticated">
+  <button class="btn btn-success" (click)="auth.login()">Sign In with Auth0</button>
 </div>
 
 <div *ngIf="auth.authenticated">
   {{auth.userProfile}}
   <p>Hello, <a routerLink="/profile" href>{{auth.userProfile?.name}}</a>!</p>
-  <button (click)="auth.logout()">Log Out</button>
-
-  <div *ngIf="dragonsExist">
-    <h2>Here Be Dragons</h2>
-
-    <ul>
-      <li *ngFor="let dragon of dragons">
-        {{dragon.name}} - {{dragon.source}}
-      </li>
-    </ul>
-  </div>
+  <button (click)="auth.logout()">Sign Out</button>
 </div>

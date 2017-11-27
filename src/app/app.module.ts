@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { ApiService } from './api.service';
 import { AuthService } from './auth/auth.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CallbackComponent } from './callback/callback.component';
 import { ProfileComponent } from './profile/profile.component';
+import {WindowService} from './window.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule
   ],
   providers: [
-    ApiService,
-    AuthService
+    AuthService,
+    WindowService
   ],
   bootstrap: [AppComponent]
 })

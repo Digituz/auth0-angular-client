@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { ApiService } from './../api.service';
-import { AuthService } from './../auth/auth.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {AuthService} from '../auth/auth.service';
+import {WindowService} from '../window.service';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +9,11 @@ import { AuthService } from './../auth/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  dragons: any[];
   authSubscription: Subscription;
-  dragonsSubscription: Subscription;
 
-  constructor(private api: ApiService, public auth: AuthService) { }
+  constructor(public auth: AuthService, public windowService: WindowService) {
+    console.log(windowService.window);
+  }
 
   ngOnInit() {
     // Subscribe to login status subject
@@ -21,10 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     // If not authenticated, unsubscribe from dragons data
     this.authSubscription = this.auth.loggedIn$.subscribe(loggedIn => {
       if (loggedIn) {
-        this._getDragons();
-      } else {
-        this.dragons = null;
-        this._destroyDragonsSubscription();
+        console.log('do something');
       }
     });
   }
@@ -32,29 +29,5 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Unsubscribe from observables
     this.authSubscription.unsubscribe();
-    this._destroyDragonsSubscription();
   }
-
-  private _getDragons() {
-    // Subscribe to dragons API observable
-    this.dragonsSubscription = this.api.getDragons$().subscribe(
-      data => {
-        this.dragons = data;
-      },
-      err => console.warn(err),
-      () => console.log('Request complete')
-    );
-  }
-
-  private _destroyDragonsSubscription() {
-    // If a dragons subscription exists, unsubscribe
-    if (this.dragonsSubscription) {
-      this.dragonsSubscription.unsubscribe();
-    }
-  }
-
-  get dragonsExist() {
-    return !!this.dragons && this.dragons.length;
-  }
-
 }

@@ -1,0 +1,33 @@
+img.auth0-logo {
+  height: 60px;
+}
+
+code, div.auth0-config {
+  background-color: #D0D2D3;
+  color: #5C666F;
+  border-radius: 3px;
+  line-height: 20px;
+}
+
+code {
+  padding: 3px 5px 3px 5px;
+  font-size: 14px;
+}
+
+div.auth0-config {
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+div.auth0-config p {
+  margin: 0 0 7px 0;
+}
+
+div.auth0-config p.property {
+  margin: 0 0 7px 20px;
+}
+
+div.sign-in-container {
+  display: flex;
+  justify-content: center;
+}
