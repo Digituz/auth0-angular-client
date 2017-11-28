@@ -9,8 +9,6 @@ import {Router, RoutesRecognized} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {
-    this.auth.configure();
-    this.auth.handleAuth();
   }
 
   ngOnInit(): void {
@@ -25,6 +23,7 @@ export class AppComponent implements OnInit {
         auth0Config.scope = scope || auth0Config.scope;
 
         this.auth.configure();
+        this.auth.handleAuth();
       }
     });
   }

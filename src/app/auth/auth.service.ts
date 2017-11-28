@@ -20,7 +20,7 @@ export class AuthService {
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-  constructor(private router: Router,  @Inject(DOCUMENT) private document: any) {
+  constructor(private router: Router, @Inject(DOCUMENT) private document: any) {
     // If authenticated, update login status subject
     if (this.authenticated) {
       this.setLoggedIn(true);
@@ -29,7 +29,14 @@ export class AuthService {
   }
 
   configure() {
-    this.auth0 = new auth0.WebAuth(this.auth0Config);
+    const {clientID, domain, audience, scope} = this.auth0Config;
+    const redirectUri = this.document.location.origin + '/callback' +
+      '?clientID=' + clientID + '&domain=' + domain + '&audience=' + audience + '&scope=' + scope;
+    const updatedConfig = {
+      ...this.auth0Config,
+      redirectUri
+    };
+    this.auth0 = new auth0.WebAuth(updatedConfig);
   }
 
   setLoggedIn(value: boolean) {
@@ -40,6 +47,7 @@ export class AuthService {
 
   login() {
     // Auth0 authorize request
+    this.configure();
     this.auth0.authorize();
   }
 
