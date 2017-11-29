@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import * as auth0 from 'auth0-js';
 import {Router} from '@angular/router';
 import {DOCUMENT} from '@angular/common';
+import {stringify} from 'querystring';
 
 @Injectable()
 export class AuthService {
@@ -10,8 +11,8 @@ export class AuthService {
   auth0Config = {
     clientID: 'lOWZ0gU498mVSsn40hKLesEJDQbcfQ8A',
     domain: 'bk-samples.auth0.com',
-    audience: 'http://spring-boot-aside.auth0samples.com/',
-    scope: 'read:contacts',
+    audience: 'https://contacts.mycompany.com/',
+    scope: 'get:contacts post:contacts',
     responseType: 'token id_token',
     redirectUri: `${this.document.location.origin}/callback`
   };
@@ -31,7 +32,7 @@ export class AuthService {
   configure() {
     const {clientID, domain, audience, scope} = this.auth0Config;
     const redirectUri = this.document.location.origin + '/callback' +
-      '?clientID=' + clientID + '&domain=' + domain + '&audience=' + audience + '&scope=' + scope;
+      '?clientID=' + clientID + '&domain=' + domain + '&audience=' + audience + '&scope=' + stringify(scope);
     const updatedConfig = {
       ...this.auth0Config,
       redirectUri
