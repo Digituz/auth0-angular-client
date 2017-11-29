@@ -38,6 +38,9 @@ docker build -t angular-auth0 .
 
 # run an instance based on this image
 docker run --name angular-auth0 -d -p 4200:80 angular-auth0
+
+# or attached to a network and without defining external ports
+docker run --name angular-auth0 --network digituz -d angular-auth0
 ```
 
 ## What is Auth0?
