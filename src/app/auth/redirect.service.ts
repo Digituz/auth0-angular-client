@@ -9,7 +9,7 @@ export class RedirectService implements CanActivate {
   }
 
   canActivate() {
-    if (!this.auth.authenticated) {
+    if (!this.auth.isAuthenticated()) {
       return true;
     }
     this.router.navigate(['/http-client']);
