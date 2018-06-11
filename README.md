@@ -43,6 +43,8 @@ docker run --name angular-auth0 -d -p 4200:80 angular-auth0
 docker run --name angular-auth0 --network digituz -d angular-auth0
 ```
 
+
+
 ## What is Auth0?
 
 Auth0 helps you to:
