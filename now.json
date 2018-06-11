@@ -1,4 +1,5 @@
 {
   "name": "auth0-angular-client",
-  "alias": "auth0-angular-client.now.sh"
+  "alias": "auth0-angular-client.now.sh",
+  "type": "docker"
 }
