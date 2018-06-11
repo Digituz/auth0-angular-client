@@ -13,7 +13,7 @@ deploy:
     all_branches: true
     master: false
 - provider: script
-  script: npm run build && now alias --docker -t $NOW_TOKEN
+  script: npm run build && npm run deploy && now alias -t $NOW_TOKEN
   skip_cleanup: true
   on:
     master: true

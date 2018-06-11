@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "deploy": "now --docker -e NODE_ENV=production -t $NOW_TOKEN",
     "lint": "ng lint"
   },
   "private": true,
